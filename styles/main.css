@@ -1,0 +1,26 @@
+body {
+  background-color: black;
+  color: lime;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 1rem;
+}
+
+.terminal {
+  border: 2px solid lime;
+  padding: 1rem;
+  min-height: 400px;
+  white-space: pre-wrap;
+}
+
+.console-line {
+  margin-bottom: 1rem;
+}
+
+.terminal-input {
+  background: black;
+  color: lime;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  width: 100%;
+}
