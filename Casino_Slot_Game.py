@@ -1,40 +1,44 @@
-import random  # Importing random to generate random choices
+import random
+from js import document
 
-# List of symbols that can appear in the slot
 symbols = ["🍒", "🍋", "🍇", "💎", "7️⃣"]
-coins = 10  # Starting number of coins
+coins = 10
+game_active = True
 
-print("🎰 Welcome to Lucky Spin!")
-print("You have", coins, "coins.")
+def update_output(text):
+    output = document.getElementById("output")
+    output.innerText += text + "\n"
 
-# Main game loop: continues as long as you have coins
-while coins > 0:
-    play = input("\nPress Enter to spin or type 'q' to quit: ")
-    if play.lower() == 'q':  # Exit condition
-        break
+update_output("🎰 Welcome to Lucky Spin!")
+update_output(f"You have {coins} coins.")
 
-    coins -= 1  # Deduct 1 coin per spin
+def spin():
+    global coins, game_active
+    if not game_active or coins <= 0:
+        update_output("❗ Game over. Refresh to play again.")
+        return
 
-    result = []  # Create an empty list to store the 3 results
-    print("\nSpinning...")
+    coins -= 1
+    update_output("\nSpinning...")
 
-    # Generate 3 random symbols using a for loop
-    for i in range(3):
-        symbol = random.choice(symbols)
-        result.append(symbol)  # Add symbol to result list
+    result = [random.choice(symbols) for _ in range(3)]
+    update_output(" ".join(result))
 
-    print(" ".join(result))  # Display all three symbols on one line
-
-    # Evaluate the result using conditionals
     if result[0] == result[1] == result[2]:
-        print("🎉 JACKPOT! You win 5 coins!")
+        update_output("🎉 JACKPOT! You win 5 coins!")
         coins += 5
     elif result[0] == result[1] or result[1] == result[2] or result[0] == result[2]:
-        print("✨ Nice! You win 2 coins!")
+        update_output("✨ Nice! You win 2 coins!")
         coins += 2
     else:
-        print("💨 No match. Try again!")
+        update_output("💨 No match. Try again!")
 
-    print("Coins left:", coins)  # Show coin count after each round
+    update_output(f"Coins left: {coins}")
+    if coins == 0:
+        update_output("🪙 Out of coins! Game over.")
+        game_active = False
 
-print("\nThanks for playing Lucky Spin! 🎰")
+def quit_game():
+    global game_active
+    game_active = False
+    update_output("\nThanks for playing Lucky Spin! 🎰")
