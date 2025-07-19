@@ -2,33 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lucky Spin 🎰</title>
+  <title>Lucky Spin Terminal</title>
   <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
   <script defer src="https://pyscript.net/latest/pyscript.js"></script>
   <style>
     body {
+      background-color: black;
+      color: lime;
       font-family: monospace;
+      padding: 2rem;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      border: 2px solid lime;
+      padding: 1rem;
+      height: 400px;
+      overflow-y: auto;
+    }
+    #user-input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 1rem;
       background: black;
       color: lime;
-      padding: 1rem;
-    }
-    #output {
-      white-space: pre-wrap;
       border: 1px solid lime;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
-    button {
-      margin-top: 1rem;
+      font-family: monospace;
     }
   </style>
 </head>
 <body>
-  <h1>🎰 Lucky Spin Terminal</h1>
-  <div id="output"></div>
-  <button py-click="spin()">🎲 Spin</button>
-  <button py-click="quit_game()">❌ Quit</button>
+  <h1>🎰 Lucky Spin — Terminal Edition</h1>
+  <div id="terminal">Loading game...</div>
+  <input id="user-input" type="text" placeholder="Type here and press Enter" autofocus />
 
-  <py-script src="main.py"></py-script>
+  <py-script src="lucky_spin.py"></py-script>
 </body>
 </html>
