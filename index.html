@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lucky Spin 🎰</title>
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <style>
+    body {
+      font-family: monospace;
+      background: black;
+      color: lime;
+      padding: 1rem;
+    }
+    #output {
+      white-space: pre-wrap;
+      border: 1px solid lime;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎰 Lucky Spin Terminal</h1>
+  <div id="output"></div>
+  <button py-click="spin()">🎲 Spin</button>
+  <button py-click="quit_game()">❌ Quit</button>
+
+  <py-script src="main.py"></py-script>
+</body>
+</html>
