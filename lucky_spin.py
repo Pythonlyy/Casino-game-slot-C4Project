@@ -1,44 +1,68 @@
 import random
 from js import document
 
+# Initialize variables
 symbols = ["🍒", "🍋", "🍇", "💎", "7️⃣"]
 coins = 10
 game_active = True
+waiting_for_input = True
 
-def update_output(text):
-    output = document.getElementById("output")
-    output.innerText += text + "\n"
+terminal = document.getElementById("terminal")
+input_box = document.getElementById("user-input")
 
-update_output("🎰 Welcome to Lucky Spin!")
-update_output(f"You have {coins} coins.")
+def println(text=""):
+    terminal.innerText += text + "\n"
+    terminal.scrollTop = terminal.scrollHeight  # auto-scroll
 
-def spin():
+def start_game():
+    println("🎰 Welcome to Lucky Spin!")
+    println(f"You have {coins} coins.")
+    println("\nPress Enter to spin or type 'q' to quit:")
+
+start_game()
+
+def handle_input(event):
     global coins, game_active
-    if not game_active or coins <= 0:
-        update_output("❗ Game over. Refresh to play again.")
-        return
 
-    coins -= 1
-    update_output("\nSpinning...")
+    if event.key == "Enter":
+        user_input = input_box.value.strip().lower()
+        input_box.value = ""  # clear input field
 
-    result = [random.choice(symbols) for _ in range(3)]
-    update_output(" ".join(result))
+        if not game_active:
+            println("Game over. Please refresh to play again.")
+            return
 
-    if result[0] == result[1] == result[2]:
-        update_output("🎉 JACKPOT! You win 5 coins!")
-        coins += 5
-    elif result[0] == result[1] or result[1] == result[2] or result[0] == result[2]:
-        update_output("✨ Nice! You win 2 coins!")
-        coins += 2
-    else:
-        update_output("💨 No match. Try again!")
+        if user_input == "q":
+            println("\nThanks for playing Lucky Spin! 🎰")
+            game_active = False
+            return
 
-    update_output(f"Coins left: {coins}")
-    if coins == 0:
-        update_output("🪙 Out of coins! Game over.")
-        game_active = False
+        if coins <= 0:
+            println("🪙 No coins left. Game over!")
+            game_active = False
+            return
 
-def quit_game():
-    global game_active
-    game_active = False
-    update_output("\nThanks for playing Lucky Spin! 🎰")
+        coins -= 1
+        println("\nSpinning...")
+        result = [random.choice(symbols) for _ in range(3)]
+        println(" ".join(result))
+
+        if result[0] == result[1] == result[2]:
+            println("🎉 JACKPOT! You win 5 coins!")
+            coins += 5
+        elif result[0] == result[1] or result[1] == result[2] or result[0] == result[2]:
+            println("✨ Nice! You win 2 coins!")
+            coins += 2
+        else:
+            println("💨 No match. Try again!")
+
+        println(f"Coins left: {coins}")
+
+        if coins > 0:
+            println("\nPress Enter to spin or type 'q' to quit:")
+        else:
+            println("🪙 No coins left. Game over!")
+            game_active = False
+
+# Attach key event
+input_box.addEventListener("keydown", handle_input)
