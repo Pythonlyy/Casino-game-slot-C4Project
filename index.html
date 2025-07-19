@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lucky Spin Game 🎰</title>
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+  <h1>🎰 Play Lucky Spin in Your Browser!</h1>
+  <p>Use the terminal below to play. Press Enter to spin or type 'q' to quit.</p>
+
+  <py-terminal></py-terminal>
+
+  <py-script>
+import random
+
+symbols = ["🍒", "🍋", "🍇", "💎", "7️⃣"]
+coins = 10
+
+print("🎰 Welcome to Lucky Spin!")
+print("You have", coins, "coins.")
+
+while coins > 0:
+    play = input("\nPress Enter to spin or type 'q' to quit: ")
+    if play.lower() == 'q':
+        break
+
+    coins -= 1
+    result = []
+    print("\nSpinning...")
+
+    for i in range(3):
+        symbol = random.choice(symbols)
+        result.append(symbol)
+
+    print(" ".join(result))
+
+    if result[0] == result[1] == result[2]:
+        print("🎉 JACKPOT! You win 5 coins!")
+        coins += 5
+    elif result[0] == result[1] or result[1] == result[2] or result[0] == result[2]:
+        print("✨ Nice! You win 2 coins!")
+        coins += 2
+    else:
+        print("💨 No match. Try again!")
+
+    print("Coins left:", coins)
+
+print("\nThanks for playing Lucky Spin! 🎰")
+  </py-script>
+</body>
+</html>
