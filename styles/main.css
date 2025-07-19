@@ -24,3 +24,13 @@ body {
   font-size: 1rem;
   width: 100%;
 }
+
+#run-button {
+  color: white;
+  background: black;
+  border: 1px solid lime;
+  padding: 0.4rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
