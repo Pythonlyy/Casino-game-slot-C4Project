@@ -85,8 +85,6 @@ function handleInput(input) {
 runButton.addEventListener('click', () => {
   runButton.disabled = true;
   startGame();
-});
-
 // Keep input focused even if user clicks elsewhere
 document.addEventListener('click', () => {
   const inputs = document.querySelectorAll('.terminal-input');
@@ -95,3 +93,5 @@ document.addEventListener('click', () => {
     lastInput.focus();
   }
 });
+
+
